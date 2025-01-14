@@ -1,11 +1,14 @@
 import pandas as pd
 
+import os
 
-with open("ressources/downloaded/index.json", "r") as f:
-    data = f.read()
+def list_files(startpath):
+    for root, dirs, files in os.walk(startpath):
+        level = root.replace(startpath, '').count(os.sep)
+        indent = ' ' * 4 * (level)
+        print('{}{}/'.format(indent, os.path.basename(root)))
+        subindent = ' ' * 4 * (level + 1)
+        for f in files:
+            print('{}{}'.format(subindent, f))
 
-print(data)
-
-# # Write to the output directory
-with open("ressources/generated/pcs/result.txt", "w") as f:
-    f.write(f"Processed Data: {data.upper()}")
+list_files("/app")

@@ -15,16 +15,16 @@
     },
     "required_ressources": {
         "downloaded": {
-            "PCS2003_N1": "https://www.insee.fr/fr/statistiques/fichier/2400059/pcs2003_liste_n1.xls",
-            "PCS2003_N2": "https://www.insee.fr/fr/statistiques/fichier/2400059/pcs2003_liste_n2.xls",
-            "PCS2003_N3": "https://www.insee.fr/fr/statistiques/fichier/2400059/pcs2003_liste_n3.xls",
-            "PCS2003_N4": "https://www.insee.fr/fr/statistiques/fichier/2400059/pcs2003_liste_n4.xls",
-            "PCS2003_to_2020": "https://www.insee.fr/fr/statistiques/fichier/6205275/matrice_P2003_P2020.csv",
-            "PCS2020_to_2003": "https://www.insee.fr/fr/statistiques/fichier/6205275/matrice_P2020_P2003.csv",
-            "PCS2020_N1": "https://www.insee.fr/fr/statistiques/fichier/6051913/Nomenclature_N1_PCS2020.xlsx",
-            "PCS2020_N2": "https://www.insee.fr/fr/statistiques/fichier/6051913/Nomenclature_N2_PCS2020.xlsx",
-            "PCS2020_N3": "https://www.insee.fr/fr/statistiques/fichier/6051913/Nomenclature_N3_PCS2020.xlsx",
-            "PCS2020_N4": "https://www.insee.fr/fr/statistiques/fichier/6051913/Nomenclature_N4_PCS2020.xlsx"
+            "PCS2003_N1.xls": "https://www.insee.fr/fr/statistiques/fichier/2400059/pcs2003_liste_n1.xls",
+            "PCS2003_N2.xls": "https://www.insee.fr/fr/statistiques/fichier/2400059/pcs2003_liste_n2.xls",
+            "PCS2003_N3.xls": "https://www.insee.fr/fr/statistiques/fichier/2400059/pcs2003_liste_n3.xls",
+            "PCS2003_N4.xls": "https://www.insee.fr/fr/statistiques/fichier/2400059/pcs2003_liste_n4.xls",
+            "PCS2003_to_2020.csv": "https://www.insee.fr/fr/statistiques/fichier/6205275/matrice_P2003_P2020.csv",
+            "PCS2020_to_2003.csv": "https://www.insee.fr/fr/statistiques/fichier/6205275/matrice_P2020_P2003.csv",
+            "PCS2020_N1.xlsx": "https://www.insee.fr/fr/statistiques/fichier/6051913/Nomenclature_N1_PCS2020.xlsx",
+            "PCS2020_N2.xlsx": "https://www.insee.fr/fr/statistiques/fichier/6051913/Nomenclature_N2_PCS2020.xlsx",
+            "PCS2020_N3.xlsx": "https://www.insee.fr/fr/statistiques/fichier/6051913/Nomenclature_N3_PCS2020.xlsx",
+            "PCS2020_N4.xlsx": "https://www.insee.fr/fr/statistiques/fichier/6051913/Nomenclature_N4_PCS2020.xlsx"
         },
         "generated": []
     }
