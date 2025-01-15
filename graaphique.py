@@ -3,6 +3,7 @@ import jsonschema
 import docker
 import json
 import os
+import shutil
 import sys
 
 root_path = os.path.dirname(__file__)
@@ -11,6 +12,12 @@ downloaded_ressources_path = os.path.join(root_path, "ressources", "downloaded")
 generated_ressources_path = os.path.join(root_path, "ressources", "generated")
 pages_path = os.path.join(root_path, "pages")
 verbose = True
+
+
+def ensure_path(path):
+    if not os.path.exists(path):
+        os.makedirs(path)
+
 
 print(Fore.GREEN + "Building Docker image...." + Style.RESET_ALL)
 client = docker.from_env()
@@ -191,6 +198,7 @@ def notify_downloaded_ressource(ressource_url):
 
 
 print(Fore.GREEN + "Downloading ressources..." + Style.RESET_ALL)
+ensure_path(downloaded_ressources_path)
 ressources_index_path = os.path.join(downloaded_ressources_path, "index.json")
 if os.path.exists(ressources_index_path):
     with open(ressources_index_path, "r") as f:
@@ -217,7 +225,7 @@ for ressource_url, requiring_recipes in ressources_to_download_for_recipes.items
     notify_downloaded_ressource(ressource_url)
 
 with open(ressources_index_path, "w") as f:
-    json.dump(ressources_index, f)
+    json.dump(ressources_index, f, indent=4)
 
 
 print(Fore.GREEN + "Running recipes.........." + Style.RESET_ALL)
@@ -272,12 +280,17 @@ while not recipes_to_run.empty():
             "mode": "ro",
         }
     if recipe["generate_ressources"]:
-        volumes[os.path.join(generated_ressources_path, recipe_name)] = {
+        path = os.path.join(generated_ressources_path, recipe_name)
+        shutil.rmtree(path)
+        ensure_path(path)
+        volumes[path] = {
             "bind": f"/app/ressources/generated/{recipe_name}",
             "mode": "rw",
         }
     for page_folder in recipe["pages"].values():
-        volumes[os.path.join(pages_path, recipe_name, page_folder)] = {
+        path = os.path.join(pages_path, recipe_name, page_folder)
+        ensure_path(path)
+        volumes[path] = {
             "bind": f"/app/pages/{recipe_name}/{page_folder}",
             "mode": "rw",
         }
@@ -287,7 +300,7 @@ while not recipes_to_run.empty():
 
     try:
         container_logs = client.containers.run(
-            "recipe-sandbox", remove=True, read_only=True, volumes=volumes
+            "recipe-sandbox", remove=True, volumes=volumes
         )
         if verbose:
             print(container_logs.decode("utf-8"))
