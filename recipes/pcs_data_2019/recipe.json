@@ -1,0 +1,20 @@
+{
+    "title": "Professions et Catégories Socioprofessionnelles (PCS)",
+    "authors": [
+        "François Hamonic"
+    ],
+    "tags": [
+        "INSEE",
+        "PCS"
+    ],
+    "generate_ressources": true,
+    "pages": {
+        "Répartition par age": "pcs_per_age"
+    },
+    "required_ressources": {
+        "downloaded": {
+            "PCS_DATA_2019.xlsx" : "https://www.insee.fr/fr/statistiques/fichier/5014833/CSP_2020_EEC19.xlsx"
+        },
+        "generated": ["pcs"]
+    }
+}

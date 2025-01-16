@@ -5,6 +5,7 @@
     ],
     "tags": [
         "INSEE",
+        "Nomenclature",
         "PCS"
     ],
     "generate_ressources": true,
@@ -24,8 +25,7 @@
             "PCS2020_N1.xlsx": "https://www.insee.fr/fr/statistiques/fichier/6051913/Nomenclature_N1_PCS2020.xlsx",
             "PCS2020_N2.xlsx": "https://www.insee.fr/fr/statistiques/fichier/6051913/Nomenclature_N2_PCS2020.xlsx",
             "PCS2020_N3.xlsx": "https://www.insee.fr/fr/statistiques/fichier/6051913/Nomenclature_N3_PCS2020.xlsx",
-            "PCS2020_N4.xlsx": "https://www.insee.fr/fr/statistiques/fichier/6051913/Nomenclature_N4_PCS2020.xlsx",
-            "PCS_DATA_2019.xlsx" : "https://www.insee.fr/fr/statistiques/fichier/5014833/CSP_2020_EEC19.xlsx"
+            "PCS2020_N4.xlsx": "https://www.insee.fr/fr/statistiques/fichier/6051913/Nomenclature_N4_PCS2020.xlsx"
         },
         "generated": []
     }

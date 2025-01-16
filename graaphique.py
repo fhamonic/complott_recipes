@@ -22,10 +22,11 @@ def ensure_path(path):
 print(Fore.GREEN + "Building Docker image...." + Style.RESET_ALL)
 client = docker.from_env()
 try:
-    image, logs = client.images.build(
+    logs = client.api.build(
         path=os.path.join(root_path, "docker_config"),
         tag="recipe-sandbox",
         buildargs={"UID": str(os.getuid()), "GID": str(os.getgid())},
+        decode=True,
     )
     if verbose:
         for line in logs:
@@ -155,7 +156,7 @@ for recipe_name, recipe in recipes.items():
             )
             invalid_recipe_names.append(recipe_name)
             continue
-        if not recipes["required_recipe_name"]["generate_ressources"]:
+        if not recipes[required_recipe_name]["generate_ressources"]:
             print(
                 Fore.YELLOW
                 + f"Warning: skipped recipe '{recipe_name}' because dependency '{required_recipe_name}' does not generate ressources."
@@ -184,7 +185,7 @@ for invalid_recipe_name in invalid_recipe_names:
 unfulfilled_recipes_requirements = {
     recipe_name: {
         "downloaded": list(recipe["required_ressources"]["downloaded"].values()),
-        "generated": recipe["required_ressources"]["generated"],
+        "generated": recipe["required_ressources"]["generated"].copy(),
     }
     for recipe_name, recipe in recipes.items()
 }
@@ -247,8 +248,8 @@ def notify_generated_ressource(ressource_name):
         unfulfilled_recipes_requirements[requiring_recipe_name]["generated"].remove(
             ressource_name
         )
-        if can_recipe_be_run(required_recipe_name):
-            recipes_to_run.put(recipe_name)
+        if can_recipe_be_run(requiring_recipe_name):
+            recipes_to_run.put(requiring_recipe_name)
 
 
 for recipe_name in recipes.keys():
@@ -281,8 +282,9 @@ while not recipes_to_run.empty():
         }
     if recipe["generate_ressources"]:
         path = os.path.join(generated_ressources_path, recipe_name)
-        shutil.rmtree(path)
-        ensure_path(path)
+        if os.path.exists(path):
+            shutil.rmtree(path)
+        os.makedirs(path)
         volumes[path] = {
             "bind": f"/app/ressources/generated/{recipe_name}",
             "mode": "rw",
@@ -296,14 +298,14 @@ while not recipes_to_run.empty():
         }
 
     if verbose:
-        print(f"Running recipe '{recipe_name}'...")
+        print(f"Running recipe '{recipe_name}'")
 
     try:
         container_logs = client.containers.run(
             "recipe-sandbox", remove=True, volumes=volumes
         )
         if verbose:
-            print(container_logs.decode("utf-8"))
+            print(container_logs.decode("utf-8"), end="")
     except docker.errors.ContainerError as e:
         print(Fore.RED + e.stderr.decode("utf-8") + Style.RESET_ALL)
         sys.exit(os.EX_SOFTWARE)

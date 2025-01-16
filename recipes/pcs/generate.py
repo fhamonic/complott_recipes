@@ -47,7 +47,7 @@ for pcs_code, pcs in pcs_2003_n4.items():
 
 pcs_2003 = {"n1": pcs_2003_n1, "n2": pcs_2003_n2, "n3": pcs_2003_n3, "n4": pcs_2003_n4}
 
-with open("ressources/generated/pcs/nomenclature_pcs_2003.json", "w") as f:
+with open("ressources/generated/pcs/pcs_2003.json", "w") as f:
     json.dump(pcs_2003, f, indent=4)
 
 ################################################################################
@@ -89,7 +89,7 @@ for pcs_code, pcs in merged_pcs_2020.items():
 
 pcs_2020 = {"N1": pcs_2020_n1, "N2": pcs_2020_n2, "N3": pcs_2020_n3, "N4": pcs_2020_n4}
 
-with open("ressources/generated/pcs/nomenclature_pcs_2020.json", "w") as f:
+with open("ressources/generated/pcs/pcs_2020.json", "w") as f:
     json.dump(pcs_2020, f, indent=4)
 
 ################################################################################
@@ -121,7 +121,7 @@ for pcs_2003_code in pcs_2003_to_2020.keys():
         for pcs_2020_code, pct in pcs_2003.items()
     }
 
-with open("ressources/generated/pcs/nomenclature_pcs_2003_to_2020.json", "w") as f:
+with open("ressources/generated/pcs/pcs_2003_to_2020.json", "w") as f:
     json.dump(pcs_2003_to_2020, f, indent=4)
 
 ################################################################################
@@ -153,57 +153,5 @@ for pcs_2020_code in pcs_2020_to_2003.keys():
         for pcs_2020_code, pct in pcs_2020.items()
     }
 
-with open("ressources/generated/pcs/nomenclature_pcs_2020_to_2003.json", "w") as f:
+with open("ressources/generated/pcs/pcs_2020_to_2003.json", "w") as f:
     json.dump(pcs_2020_to_2003, f, indent=4)
-
-################################################################################
-################################ PCS data 2019 #################################
-################################################################################
-
-pcs_data_2019 = {}
-
-columns_aliases = {
-    "Intitulé PCS 2020": "name",
-    "libellé court – nomenclature d’usage": "short_name",
-}
-sheet = pd.read_excel(
-    "ressources/downloaded/PCS_DATA_2019.xlsx",
-    skiprows=3,
-    nrows=152,
-    header=None,
-    names=[
-        "Effectif",
-        "Part emploi total",
-        "Part PCS N1",
-        "femmes",
-        "15-24 ans",
-        "25-49 ans",
-        "50 ans ou plus",
-        "Aucun diplôme, brevet des collèges",
-        "CAP-BEP",
-        "Bac",
-        "Bac+2 ou plus",
-        "Indépendants",
-        "CDI",
-        "CDD et intérim > 3 mois",
-        "CCD et intérim <= 3 mois",
-        "Apprentis, stagiaires, contrats aidés",
-        "Sous-emploi",
-        "Temps partiel",
-        "Travail le samedi",
-        "Travail le dimanche",
-        "Travail la nuit",
-        "Travail à domicile",
-    ],
-    index_col=0,
-)
-
-print(sheet.at[sheet.index[1], "Effectif"])
-
-# data = {}
-# for i in sheet.index:
-#     data[str(i)] = {columns_aliases[c]: sheet.at[i, c] for c in sheet.columns}
-
-
-# with open("ressources/generated/pcs/nomenclature_pcs_2020_to_2003.json", "w") as f:
-#     json.dump(pcs_2020_to_2003, f, indent=4)

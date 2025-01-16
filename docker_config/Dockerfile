@@ -1,4 +1,3 @@
-# Use Python as the base image
 FROM python:3.11-slim
 
 ARG UID=1000
@@ -13,5 +12,4 @@ RUN pip install --no-cache-dir -r python_requirements.txt --no-warn-script-locat
 
 WORKDIR /app
 
-# Command to run the Python script (default behavior)
 ENTRYPOINT ["python", "/app/recipe/generate.py"]
