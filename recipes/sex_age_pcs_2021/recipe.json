@@ -1,0 +1,22 @@
+{
+    "title": "Age par sexe et PCS",
+    "authors": [
+        "François Hamonic"
+    ],
+    "tags": [
+        "INSEE",
+        "PCS",
+        "age",
+        "sexe"
+    ],
+    "generate_ressources": true,
+    "pages": {
+        "Population (>= 15 ans) par age, sexe et PCS": "all_age_pcs"
+    },
+    "required_ressources": {
+        "downloaded": {
+            "AGE_PCS_2021.csv" : "https://www.insee.fr/fr/statistiques/tableaux/8200799/FE/1/rp2021_td_pop6_v2.csv"
+        },
+        "generated": ["pcs"]
+    }
+}

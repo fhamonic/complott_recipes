@@ -223,6 +223,17 @@ for ressource_url, requiring_recipes in ressources_to_download_for_recipes.items
                 os.remove(ressource_path)
             continue
         ressources_index[ressource_url] = ressource_file_name
+        if verbose:
+            print("Donwload: ", end="")
+    else:
+        if verbose:
+            print("In cache: ", end="")
+        url_length = len(ressource_url)
+    if verbose:
+        if url_length <= 63:
+            print(ressource_url)
+        else:
+            print(f"{ressource_url[:22]}...{ressource_url[-45:]}")
     notify_downloaded_ressource(ressource_url)
 
 with open(ressources_index_path, "w") as f:
@@ -302,13 +313,36 @@ while not recipes_to_run.empty():
 
     try:
         container_logs = client.containers.run(
-            "recipe-sandbox", remove=True, volumes=volumes
+            "recipe-sandbox",
+            remove=True,
+            volumes=volumes,
+            network_disabled=True,
+            mem_limit="1000m",
         )
         if verbose:
             print(container_logs.decode("utf-8"), end="")
     except docker.errors.ContainerError as e:
-        print(Fore.RED + e.stderr.decode("utf-8") + Style.RESET_ALL)
-        sys.exit(os.EX_SOFTWARE)
+        match e.exit_status:
+            case 1:
+                print(Fore.RED + e.stderr.decode("utf-8") + Style.RESET_ALL)
+                continue
+            case 137:
+                print(Fore.RED + "Container exceeded memory limit" + Style.RESET_ALL)
+                continue
 
     if recipe["generate_ressources"]:
         notify_generated_ressource(recipe_name)
+
+unbuilt_recipes_names = [
+    recipe_name for recipe_name in recipes.keys() if not can_recipe_be_run(recipe_name)
+]
+if len(unbuilt_recipes_names) > 0:
+    print(
+        Fore.YELLOW
+        + f"Warning: The following recipes were not built because of missing requirements:"
+    )
+    for recipe_name in unbuilt_recipes_names:
+        print(
+            f"\t-{recipe_name} ({unfulfilled_recipes_requirements[recipe_name]['generated']},{unfulfilled_recipes_requirements[recipe_name]['downloaded']})"
+        )
+    print(Style.RESET_ALL)

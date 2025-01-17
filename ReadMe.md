@@ -10,7 +10,9 @@ Install Python and Docker
 ## Windows
 
 Download and install Docker : https://docs.docker.com/desktop/setup/install/windows-install/
+
 Download and install Python : https://www.python.org/downloads/
+
 Then run:
 
     pip install colorama docker jsonschema
@@ -46,6 +48,10 @@ staisfaction dans la vie : https://www.insee.fr/fr/statistiques/8279391?sommaire
 écarts salaire horaire : https://www.insee.fr/fr/statistiques/3564663#titre-bloc-14
 
 prestige perçu ? (médiatisation, CEREQ, attractivité)
+
+# IFOP data
+
+https://www.ipsos.com/sites/default/files/ct/news/documents/2023-10/Ipsos%20Sopra%20Steria_Sociologie%20des%20electorats_11%20Avril%2011h30.pdf
 
 # ECharts examples
 
