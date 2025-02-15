@@ -1,9 +1,9 @@
 import json
 import pandas as pd
-import re
-import sentence_transformers as st
+# import re
+# import sentence_transformers as st
 
-with open("ressources/generated/pcs/pcs_2003.json", "r") as f:
+with open("resources/generated/pcs/pcs_2003.json", "r") as f:
     pcs_2003 = json.load(f)
 
 ################################################################################
@@ -27,7 +27,7 @@ status_columns = [
     "Apprentis, stagiaires, contrats aidés",
 ]
 sheet = pd.read_excel(
-    "ressources/downloaded/PCS_DATA_2019.xlsx",
+    "resources/downloaded/PCS_DATA_2019.xlsx",
     skiprows=3,
     nrows=152,
     header=None,
@@ -53,11 +53,11 @@ sheet = pd.read_excel(
 
 index_labels = list([s for s in sheet.index if str(s) != "nan"])
 
-n2_data = {}
-for id in index_labels:
-    if re.match("^[A-Z]", id) and id in [pcs["name"] for pcs in pcs_2003["n1"].values()]:
-    # if re.match("^[0-9]{2} ", id):
-        print(id)
+# n2_data = {}
+# for id in index_labels:
+#     if re.match("^[A-Z]", id) and id in [pcs["name"] for pcs in pcs_2003["n1"].values()]:
+#     # if re.match("^[0-9]{2} ", id):
+#         print(id)
 
 print(sheet.at[sheet.index[1], "Effectif"])
 
@@ -71,5 +71,5 @@ print(sheet.at[sheet.index[1], "Effectif"])
 #     data[str(i)] = {columns_aliases[c]: sheet.at[i, c] for c in sheet.columns}
 
 
-# with open("ressources/generated/pcs/pcs_2020_to_2003.json", "w") as f:
+# with open("resources/generated/pcs/pcs_2020_to_2003.json", "w") as f:
 #     json.dump(pcs_2020_to_2003, f, indent=4)

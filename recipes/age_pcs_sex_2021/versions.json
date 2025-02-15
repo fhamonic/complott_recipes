@@ -1,0 +1,14 @@
+{
+    "total": {
+        "folder": "all",
+        "artifact_folder": "total"
+    },
+    "men": {
+        "folder": "all",
+        "artifact_folder": "men"
+    },
+    "women": {
+        "folder": "all",
+        "artifact_folder": "women"
+    }
+}

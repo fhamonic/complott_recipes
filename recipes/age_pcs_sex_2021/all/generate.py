@@ -1,52 +1,13 @@
-import csv
 import json
+import helper
 import math
 
-with open("ressources/generated/pcs/pcs_2003.json", "r") as f:
+with open("resources/generated/pcs/pcs_2003.json", "r") as f:
     pcs_2003 = json.load(f)
 
 ################################################################################
 ############################## Parse PCS age 2021 ##############################
 ################################################################################
-
-
-def parse_csv_as_dict(
-    file_path,
-    columns,
-    index_column,
-    indices=None,
-    columns_types=None,
-    delimiter=";",
-    first_data_row=1,
-    last_data_row=None,
-):
-    with open(file_path, "r") as file:
-        lines = [line.rstrip() for line in file]
-        if last_data_row is None:
-            last_data_row = len(lines)
-        if columns_types is None:
-            columns_types = [str for _ in columns]
-        data_rows = [lines[i] for i in range(first_data_row - 1, last_data_row)]
-        rows = list(csv.DictReader(data_rows, fieldnames=columns, delimiter=delimiter))
-        if indices is None:
-            return {
-                row[index_column]: {
-                    k: t(row[k])
-                    for k, t in zip(columns, columns_types)
-                    if k != index_column
-                }
-                for row in rows
-            }
-        else:
-            return {
-                i: {
-                    k: t(row[k])
-                    for k, t in zip(columns, columns_types)
-                    if k != index_column
-                }
-                for row, i in zip(rows, indices)
-            }
-
 
 columns = ["age"] + list(pcs_2003["n1"].keys())
 columns_types = [str] + [int for _ in pcs_2003["n1"].keys()]
@@ -66,7 +27,7 @@ indices = [
 
 data = {}
 data["total"] = parse_csv_as_dict(
-    "ressources/downloaded/AGE_PCS_2021.csv",
+    "resources/downloaded/AGE_PCS_2021.csv",
     columns=columns,
     index_column="age",
     columns_types=columns_types,
@@ -74,7 +35,7 @@ data["total"] = parse_csv_as_dict(
     first_data_row=47,
 )
 data["men"] = parse_csv_as_dict(
-    "ressources/downloaded/AGE_PCS_2021.csv",
+    "resources/downloaded/AGE_PCS_2021.csv",
     columns=columns,
     index_column="age",
     columns_types=columns_types,
@@ -82,7 +43,7 @@ data["men"] = parse_csv_as_dict(
     first_data_row=65,
 )
 data["women"] = parse_csv_as_dict(
-    "ressources/downloaded/AGE_PCS_2021.csv",
+    "resources/downloaded/AGE_PCS_2021.csv",
     columns=columns,
     index_column="age",
     columns_types=columns_types,
@@ -90,7 +51,7 @@ data["women"] = parse_csv_as_dict(
     first_data_row=83,
 )
 
-with open("ressources/generated/sex_age_pcs_2021/data.json", "w") as f:
+with open("resources/generated/sex_age_pcs_2021/data.json", "w") as f:
     json.dump(data, f, indent=4)
 
 

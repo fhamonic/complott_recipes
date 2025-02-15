@@ -1,0 +1,21 @@
+{
+    "recipe_type": "python",
+    "dependencies": [
+        {
+            "type": "fetch",
+            "url": "https://www.insee.fr/fr/statistiques/fichier/2400059/pcs2003_liste_n1.xls"
+        },
+        {
+            "type": "fetch",
+            "url": "https://www.insee.fr/fr/statistiques/fichier/2400059/pcs2003_liste_n2.xls"
+        },
+        {
+            "type": "fetch",
+            "url": "https://www.insee.fr/fr/statistiques/fichier/2400059/pcs2003_liste_n3.xls"
+        },
+        {
+            "type": "fetch",
+            "url": "https://www.insee.fr/fr/statistiques/fichier/2400059/pcs2003_liste_n4.xls"
+        }
+    ]
+}

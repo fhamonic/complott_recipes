@@ -1,0 +1,34 @@
+{
+    "recipe_type": "python",
+    "dependencies": [
+        {
+            "type": "fetch",
+            "url": "https://www.insee.fr/fr/statistiques/fichier/6205275/matrice_P2003_P2020.csv"
+        },
+        {
+            "type": "fetch",
+            "url": "https://www.insee.fr/fr/statistiques/fichier/6205275/matrice_P2020_P2003.csv"
+        },
+        {
+            "type": "fetch",
+            "url": "https://www.insee.fr/fr/statistiques/fichier/6051913/Nomenclature_N1_PCS2020.xlsx"
+        },
+        {
+            "type": "fetch",
+            "url": "https://www.insee.fr/fr/statistiques/fichier/6051913/Nomenclature_N2_PCS2020.xlsx"
+        },
+        {
+            "type": "fetch",
+            "url": "https://www.insee.fr/fr/statistiques/fichier/6051913/Nomenclature_N3_PCS2020.xlsx"
+        },
+        {
+            "type": "fetch",
+            "url": "https://www.insee.fr/fr/statistiques/fichier/6051913/Nomenclature_N4_PCS2020.xlsx"
+        },
+        {
+            "type": "build",
+            "recipe_name": "pcs",
+            "version": "2003"
+        }
+    ]
+}

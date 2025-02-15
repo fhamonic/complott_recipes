@@ -1,0 +1,14 @@
+{
+    "recipe_type": "python",
+    "dependencies": [
+        {
+            "type": "fetch",
+            "url": "https://www.insee.fr/fr/statistiques/tableaux/8200799/FE/1/rp2021_td_pop6_v2.csv"
+        },
+        {
+            "type": "build",
+            "recipe_name": "pcs",
+            "version": "2003"
+        }
+    ]
+}

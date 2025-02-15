@@ -1,6 +1,0 @@
-numpy
-pandas
-xlrd
-openpyxl
-markdownify
-sentence_transformers
